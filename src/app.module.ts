@@ -18,6 +18,7 @@ import { AuthorsModule } from './authors/author.module';
       type: 'sqlite',
       database: 'db',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      migrations: ['dist/db/migrations/*{.ts,.js}'],
       synchronize: true,
     }),
     AuthorsModule,
