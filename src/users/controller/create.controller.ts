@@ -1,0 +1,35 @@
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Body,
+  Param,
+} from '@nestjs/common';
+import { UsersService } from '../user.service';
+import { User } from '../user.entity';
+import { CreateUserDto } from '../dto/create.user.dto';
+
+@Controller('users')
+export class CreateUserController {
+  constructor(private usersService: UsersService) {}
+
+  @Post('create')
+  @Post()
+  async create(@Body() createUserDto: CreateUserDto) {
+    try {
+      await this.usersService.create(createUserDto);
+
+      return {
+        success: true,
+        message: 'User Created Successfully',
+      };
+    } catch (error) {
+      return {
+        success: false,
+        message: error.message,
+      };
+    }
+  }
+}

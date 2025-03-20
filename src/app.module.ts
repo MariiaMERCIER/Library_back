@@ -6,6 +6,8 @@ import { AppService } from 'src/app.service';
 import { ConfigModule } from '@nestjs/config';
 import configuration from 'config/configuration';
 import { AuthorsModule } from './authors/author.module';
+import { BooksModule } from './books/book.module';
+import { UsersModule } from './users/user.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { AuthorsModule } from './authors/author.module';
       synchronize: true,
     }),
     AuthorsModule,
+    BooksModule,
+    UsersModule,
   ],
 
   controllers: [AppController],
