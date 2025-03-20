@@ -7,6 +7,7 @@ export class DeleteAuthorController {
 
   @Delete(':id/delete')
   async delete(@Param('id') id: string) {
+    const existingAuthor = await this.authorsService.findOne(id);
     return this.authorsService.delete(id);
   }
 }

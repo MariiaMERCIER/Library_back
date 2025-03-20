@@ -8,6 +8,7 @@ import {
   Param,
 } from '@nestjs/common';
 import { UsersService } from '../user.service';
+import { populate } from 'dotenv';
 
 @Controller('users')
 export class FindOneUserController {
@@ -19,6 +20,7 @@ export class FindOneUserController {
     return {
       success: true,
       data,
+      populate: 'authors',
       message: 'User Fetched Successfully',
     };
   }
