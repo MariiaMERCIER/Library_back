@@ -9,27 +9,24 @@ import {
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
-import * as bcrypt from 'bcrypt';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: string = uuid();
 
   @Column()
-  fullname: string;
+  fullName: string;
 
   @Column()
   email: string;
 
-  @BeforeInsert()
-  async hashPassword() {
-    this.password = await bcrypt.hashPassword(this.password, 10);
-  }
-
-  @Column('text')
+  @Column()
   password: string;
 
-  @ManyToMany(() => Author)
-  @JoinTable()
-  authors: Author[];
+  @Column('text')
+  token: string;
+
+  // @ManyToMany(() => Author)
+  // @JoinTable()
+  // authors: Author[];
 }

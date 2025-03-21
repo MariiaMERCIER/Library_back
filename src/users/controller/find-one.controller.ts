@@ -19,7 +19,7 @@ export class FindOneUserController {
     return {
       success: true,
       data,
-      populate: 'authors',
+      // populate: 'authors',
       message: 'User Fetched Successfully',
     };
   }

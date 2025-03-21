@@ -4,6 +4,8 @@ import { Repository, UpdateResult } from 'typeorm';
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create.user.dto';
 import { UpdateUserDto } from './dto/update.user.dto';
+import { uid } from 'uid';
+import { SHA256, encBase64 } from 'crypto-js';
 
 @Injectable()
 export class UsersService {
@@ -13,12 +15,10 @@ export class UsersService {
   ) {}
 
   async findAll(): Promise<User[]> {
-    console.log('findAll');
     return await this.usersRepository.find();
   }
 
   async findOne(id: string): Promise<User | null> {
-    console.log('findOne');
     const userData = await this.usersRepository.findOneBy({ id });
     if (!userData) {
       throw new HttpException('User Not Found', 404);
@@ -27,8 +27,17 @@ export class UsersService {
   }
 
   async create(user: CreateUserDto): Promise<User> {
-    console.log(user);
-    return await this.usersRepository.save(user);
+    const password = user.password;
+    const salt = uid(16);
+    const hash = SHA256(password + salt).toString(encBase64);
+    const token = uid(16);
+
+    const newUser = {
+      ...user,
+      password: hash,
+      token,
+    };
+    return this.usersRepository.save(newUser);
   }
 
   async update(id: string, user: UpdateUserDto): Promise<UpdateResult> {

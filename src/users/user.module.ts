@@ -4,7 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { User } from './user.entity';
 import { UsersService } from './user.service';
-
 import { CreateUserController } from './controller/create.controller';
 import { UpdateUserController } from './controller/update.controller';
 import { DeleteUserController } from './controller/delete.controller';

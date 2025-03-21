@@ -5,10 +5,9 @@ import { AppController } from 'src/app.controller';
 import { AppService } from 'src/app.service';
 import { ConfigModule } from '@nestjs/config';
 import configuration from 'config/configuration';
-import { AuthorsModule } from './authors/author.module';
-import { BooksModule } from './books/book.module';
+
 import { UsersModule } from './users/user.module';
-import { UsersService } from './users/user.service';
+import { User } from './users/user.entity';
 
 @Module({
   imports: [
@@ -20,8 +19,9 @@ import { UsersService } from './users/user.service';
     }),
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'dbLibrary',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      database: 'database.sqlite',
+      logging: true,
+      entities: [User],
       synchronize: true,
     }),
   ],
