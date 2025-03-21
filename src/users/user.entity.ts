@@ -5,8 +5,11 @@ import {
   PrimaryGeneratedColumn,
   ManyToMany,
   JoinTable,
+  BeforeInsert,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
+
+import * as bcrypt from 'bcrypt';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -18,7 +21,12 @@ export class User {
   @Column()
   email: string;
 
-  @Column()
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await bcrypt.hashPassword(this.password, 10);
+  }
+
+  @Column('text')
   password: string;
 
   @ManyToMany(() => Author)

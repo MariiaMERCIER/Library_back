@@ -13,10 +13,12 @@ export class UsersService {
   ) {}
 
   async findAll(): Promise<User[]> {
+    console.log('findAll');
     return await this.usersRepository.find();
   }
 
   async findOne(id: string): Promise<User | null> {
+    console.log('findOne');
     const userData = await this.usersRepository.findOneBy({ id });
     if (!userData) {
       throw new HttpException('User Not Found', 404);
@@ -25,6 +27,7 @@ export class UsersService {
   }
 
   async create(user: CreateUserDto): Promise<User> {
+    console.log(user);
     return await this.usersRepository.save(user);
   }
 

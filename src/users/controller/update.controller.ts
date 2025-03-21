@@ -3,11 +3,11 @@ import { UsersService } from '../user.service';
 import { User } from '../user.entity';
 import { UpdateUserDto } from '../dto/update.user.dto';
 
-@Controller('users')
+@Controller('user')
 export class UpdateUserController {
   constructor(private usersService: UsersService) {}
 
-  @Patch(':id/update')
+  @Patch(':id')
   async update(@Param('id') id, @Body() user: UpdateUserDto) {
     try {
       await this.usersService.update(id, user);

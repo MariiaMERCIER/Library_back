@@ -8,9 +8,8 @@ import {
   Param,
 } from '@nestjs/common';
 import { UsersService } from '../user.service';
-import { populate } from 'dotenv';
 
-@Controller('users')
+@Controller('user')
 export class FindOneUserController {
   constructor(private usersService: UsersService) {}
 

@@ -8,9 +8,11 @@ import configuration from 'config/configuration';
 import { AuthorsModule } from './authors/author.module';
 import { BooksModule } from './books/book.module';
 import { UsersModule } from './users/user.module';
+import { UsersService } from './users/user.service';
 
 @Module({
   imports: [
+    UsersModule,
     ConfigModule.forRoot({
       envFilePath: ['.env.local', '.env'],
       isGlobal: true,
@@ -18,14 +20,10 @@ import { UsersModule } from './users/user.module';
     }),
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'db',
+      database: 'dbLibrary',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      migrations: ['dist/db/migrations/*{.ts,.js}'],
       synchronize: true,
     }),
-    AuthorsModule,
-    BooksModule,
-    UsersModule,
   ],
 
   controllers: [AppController],
