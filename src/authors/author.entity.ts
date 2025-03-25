@@ -1,13 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { v4 as uuid } from 'uuid';
+import { Entity, Column } from 'typeorm';
+
 @Entity()
 export class Author {
-  @PrimaryGeneratedColumn()
-  id: string = uuid();
+  @Column()
+  name: string;
 
   @Column()
-  firstName: string;
-
-  @Column()
-  lastName: string;
+  books: string[];
 }

@@ -11,7 +11,7 @@ import { v4 as uuid } from 'uuid';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string = uuid();
 
   @Column()
@@ -26,7 +26,6 @@ export class User {
   @Column('text')
   token: string;
 
-  // @ManyToMany(() => Author)
-  // @JoinTable()
-  // authors: Author[];
+  @Column('json', { nullable: true })
+  authors: Author[];
 }

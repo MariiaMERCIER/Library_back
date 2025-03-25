@@ -9,6 +9,7 @@ export class UpdateUserController {
 
   @Patch(':id')
   async update(@Param('id') id, @Body() user: UpdateUserDto) {
+    console.log(user);
     try {
       await this.usersService.update(id, user);
       return {

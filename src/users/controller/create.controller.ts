@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { UsersService } from '../user.service';
 import { CreateUserDto } from '../dto/create.user.dto';
 
@@ -10,7 +10,6 @@ export class CreateUserController {
   async create(@Body() createUserDto: CreateUserDto) {
     try {
       await this.usersService.create(createUserDto);
-
       return {
         success: true,
         message: 'User Created Successfully',

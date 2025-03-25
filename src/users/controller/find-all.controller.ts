@@ -7,7 +7,6 @@ export class FindAllUserController {
 
   @Get()
   async getAll() {
-    console.log('Get All Users');
     try {
       const data = await this.usersService.findAll();
       return {
