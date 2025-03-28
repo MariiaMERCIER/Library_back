@@ -1,8 +1,5 @@
 import { Module } from '@nestjs/common';
-
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from 'src/app.controller';
-import { AppService } from 'src/app.service';
 import { ConfigModule } from '@nestjs/config';
 import configuration from 'config/configuration';
 
@@ -25,8 +22,5 @@ import { User } from './users/user.entity';
       synchronize: true,
     }),
   ],
-
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
