@@ -26,19 +26,37 @@ export class UsersService {
     return userData;
   }
 
-  async create(user: CreateUserDto): Promise<User> {
-    const password = user.password;
-    const salt = uid(16);
-    const hash = SHA256(password + salt).toString(encBase64);
-    const token = uid(16);
-
-    const newUser = {
-      ...user,
-      password: hash,
-      token,
-    };
-    return this.usersRepository.save(newUser);
+  async findOneByEmail(email: string): Promise<User | null> {
+    const userData = await this.usersRepository.findOneBy({ email });
+    if (!userData) {
+      throw new HttpException('User Not Found', 404);
+    }
+    return userData;
   }
+
+  async create(user: CreateUserDto): Promise<User> {
+    return this.usersRepository.save(user);
+  }
+  // async login(email: string, password: string): Promise<Partial<User>> {
+  //   const user = await this.usersRepository.findOneBy({ email });
+
+  //   if (!user) {
+  //     throw new HttpException('User Not Found', 404);
+  //   }
+
+  //   const salt = user.salt;
+  //   const hash = SHA256(password + salt).toString(encBase64);
+  //   if (hash !== user.password) {
+  //     throw new HttpException("The email or password isn't correct", 401);
+  //   }
+  //   const responseUser = {
+  //     id: user.id,
+  //     token: user.token,
+  //     email: user.email,
+  //     fullName: user.fullName,
+  //   };
+  //   return responseUser;
+  // }
 
   async update(id: string, user: UpdateUserDto): Promise<UpdateResult> {
     const existingUser = await this.findOne(id);

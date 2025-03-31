@@ -5,9 +5,11 @@ import configuration from 'config/configuration';
 
 import { UsersModule } from './users/user.module';
 import { User } from './users/user.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
+    AuthModule,
     UsersModule,
     ConfigModule.forRoot({
       envFilePath: ['.env.local', '.env'],
